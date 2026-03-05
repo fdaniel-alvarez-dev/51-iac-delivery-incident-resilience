@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "environment": "staging",
+    "owner_team": "platform",
+    "snapshot_utc": "2026-03-05T00:00:00Z"
+  },
+  "toolchain": {
+    "terraform_required_version": ">= 1.6.0, < 2.0.0",
+    "providers_pinned": true
+  },
+  "kubernetes_clusters": [
+    {
+      "name": "saas-staging-eks",
+      "cloud": "aws",
+      "version": "1.29",
+      "private_api": true,
+      "node_pools": [
+        { "name": "system", "min": 2, "max": 6, "instance_type": "m6i.large" }
+      ]
+    },
+    {
+      "name": "saas-staging-aks",
+      "cloud": "azure",
+      "version": "1.29",
+      "private_api": true,
+      "node_pools": [
+        { "name": "system", "min": 2, "max": 6, "instance_type": "Standard_D4s_v5" }
+      ]
+    }
+  ],
+  "edge": {
+    "cloudflare": {
+      "waf_enabled": true,
+      "zone_lockdown": true,
+      "tls_mode": "strict"
+    }
+  },
+  "network": {
+    "vpn_required": true,
+    "reverse_proxy": {
+      "enabled": true,
+      "http_to_https_redirect": true,
+      "rate_limiting": true
+    }
+  },
+  "data": {
+    "mongodb": {
+      "ha": true,
+      "backup_enabled": true,
+      "backup_rpo_minutes": 15
+    }
+  },
+  "tags_required": [
+    "environment",
+    "owner_team",
+    "data_classification"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "INC-2026-03-05-001",
+  "service": "global-saas-api",
+  "severity": "sev2",
+  "detected_utc": "2026-03-05T02:12:00Z",
+  "timeline": [
+    { "at_utc": "2026-03-05T02:12:00Z", "event": "Alert fired: elevated 5xx" },
+    { "at_utc": "2026-03-05T02:18:00Z", "event": "On-call acknowledged" },
+    { "at_utc": "2026-03-05T02:33:00Z", "event": "Mitigation: rollback initiated" }
+  ],
+  "communications": {
+    "status_page_updates": 0,
+    "internal_channel": "inc-global-saas-api"
+  },
+  "runbooks_expected": [
+    "docs/runbooks/iac-drift-and-change-control.md",
+    "docs/runbooks/cicd-flakiness-and-release-safety.md",
+    "docs/runbooks/incident-response-and-mttr.md"
+  ],
+  "post_incident": {
+    "rca_completed": false,
+    "action_items_count": 0
+  }
+}

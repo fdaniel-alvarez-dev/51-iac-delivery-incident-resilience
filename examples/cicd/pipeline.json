@@ -1,0 +1,13 @@
+{
+  "name": "saas-platform-ci",
+  "targets": ["linux", "windows", "macos"],
+  "stages": [
+    { "name": "build", "timeout_minutes": 20, "retries": 1, "caches": ["pip"], "produces_artifact": true, "artifact_immutable": true },
+    { "name": "test", "timeout_minutes": 60, "retries": 0, "parallelism": 2, "flaky_test_quarantine": false },
+    { "name": "deploy", "timeout_minutes": 30, "retries": 0, "strategy": "canary", "rollback_plan": "Rollback to previous stable artifact; revert feature flags; verify error budget recovery." }
+  ],
+  "release": {
+    "requires_approval": false,
+    "canary_supported": false
+  }
+}
